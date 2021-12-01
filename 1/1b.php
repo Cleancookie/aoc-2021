@@ -3,7 +3,7 @@ $report = file(__DIR__ . '/report.txt');
 $reportSummed = [];
 
 foreach ($report as $key => $value) {
-    if (!isset($report[$key + 1]) && !isset($report[$key + 2])) {
+    if (!isset($report[$key + 2])) {
         continue;
     }
     $reportSummed[] = $value + $report[$key + 1] + $report[$key + 2];

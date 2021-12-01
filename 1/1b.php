@@ -1,6 +1,5 @@
 <?php
-$reportRaw = file_get_contents(__DIR__ . '/report.json');
-$report = json_decode($reportRaw);
+$report = file(__DIR__ . '/report.txt');
 $reportSummed = [];
 
 foreach ($report as $key => $value) {

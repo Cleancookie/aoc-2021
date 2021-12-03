@@ -7,8 +7,10 @@ $counts = [];
 
 // Count 0s and 1s
 foreach ($results as $result) {
-    // Need to trim because last character of $result is a new line character
+    // turn $result into an array where each element is a column
     $bits = str_split($result);
+    
+    // for each column, increment the corresponding counter for 1 or 0
     foreach ($bits as $col => $bit) {
         $counts[$col][$bit] = isset($counts[$col][$bit]) ? $counts[$col][$bit] + 1 : 1;
     }

@@ -1,6 +1,6 @@
 <?php
 
-$input = file(__DIR__ . '/example-input.txt');
+$input = file(__DIR__ . '/input.txt');
 $input = array_map(fn ($line) => rtrim($line), $input);
 
 // Get numbers drawn
@@ -33,8 +33,9 @@ foreach ($numbersDrawn as $num) {
         if (isWinning($board)) {
             $winners[] = $boardId;
             $finalNum = $num;
-            var_dump($num);
-            break;
+            echo "<h1>BOARD $boardId</h1>";
+            echo '<code>'  . viewBoard($board) . '<br><br></code>';
+            continue;
         }
     }
 }
@@ -44,6 +45,14 @@ $sum = sumBoard($boards[$winner]);
 $finalScore = $sum * $finalNum;
 
 echo "Last winning board: $winner, Last number: $finalNum, Sum: $sum, Final Score: $finalScore";
+
+function viewBoard($board) {
+    $view = [];
+    foreach ($board as $rows) {
+        $view[] = implode(' ', array_map(fn ($num) => str_pad((string)$num, 3, ' ', STR_PAD_LEFT), $rows));
+    }
+    return implode('<br>', $view);
+}
 
 function sumBoard($board)
 {
@@ -59,7 +68,12 @@ function sumBoard($board)
 function markNumberOnBoard($board, $num)
 {
     foreach ($board as $colId => $rows) {
-        $board[$colId] = array_map(fn ($value) => $value === $num ? 'x' : $value, $rows);
+        $board[$colId] = array_map(function($value) use ($num, $board) {
+            if ($value === $num) {
+//                print_r($num . ' FOUND on board ' . $board[0][0] . PHP_EOL);
+            }
+            return $value === $num ? 'x' : $value;
+        }, $rows);
     }
 
     return $board;

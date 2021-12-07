@@ -1,3 +1,3 @@
 <?php
 
-include(__DIR__ . '/../5/5b.php');
+include(__DIR__ . '/../6/6b.php');

@@ -6,29 +6,28 @@ $crabs = explode(',', $input);
 $median = findMedian($crabs);
 $fuel = calculateFuel($crabs, $median);
 
-print_r('<pre>*** DEBUG ***<br>');
-print_r($fuel);
-print_r('</pre>');
-print_r('<pre>*** DEBUG ***<br>');
-print_r($median);
-print_r('</pre>');
-die;
-die;
+echo $fuel . PHP_EOL;
 
 function calculateFuel($loactions, $destination) {
     $fuel = 0;
     foreach ($loactions as $location) {
         $fuel += abs($location - $destination);
-        echo abs($location - $destination) . PHP_EOL;
     }
 
     return $fuel;
 }
 
 function findMedian($nums) {
-    $counts = array_count_values($nums);
-    $median = array_keys($counts, max($counts));
+    sort($nums);
+    $medianKey = (count($nums)-1) / 2;
 
+    if (is_int($medianKey)) {
+        // Theres an even amount of $nums
+        $a = $nums[$medianKey];
+        $b = $nums[$medianKey + 1];
 
-    return array_sum($median) / count($median);
+        return ($a + $b) / 2;
+    }
+
+    return $nums[$medianKey];
 }

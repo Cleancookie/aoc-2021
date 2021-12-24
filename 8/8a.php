@@ -1,12 +1,15 @@
 <?php
 $report = file(__DIR__ . '/example.txt');
 $report = file(__DIR__ . '/input.txt');
-$report = array_map(fn ($result) => trim($result), $report);
+$report = array_map(function ($result) {
+  return trim($result);
+}, $report);
 $displays = array_map(
-    fn ($numbers) => [
-        'input' => explode(' ', $numbers[0]), 'output' => explode(' ', $numbers[1])
-    ],
-    array_map(fn ($line) => explode(' | ', $line), $report)
+  function($numbers) {return ['input' => explode(' ', $numbers[0]), 'output' => explode(' ', $numbers[1])]; }, 
+  array_map(
+    function($line) { return explode(' | ', $line); }, 
+    $report
+  )
 );
 
 $counter = 0;

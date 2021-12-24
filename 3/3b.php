@@ -10,8 +10,9 @@ echo "oxygen: $oxygenBinary, co2: $co2Binary, life: $life";
 
 // Recursive function
 function filterReport($report, $mostImportantBit, $col = 0) {
-    // Exit condition
+    // Exit condition, if there is only 1 row of binary left, return it
     if (count($report) <= 1) {
+        // return first thing in $report
         return reset($report);
     }
 
